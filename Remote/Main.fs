@@ -6,7 +6,7 @@ type WebPageItem =
     | Paragraph of string
     | Image of heightPixels:int * widthPixels:int * url:string
     | Action of label:string * action:(string->string)
-    | Box of WebPageItem
+    | Box of WebPageItem list
 
 type WebPage = WebPageItem list
 
@@ -21,7 +21,7 @@ let pageItems =
         Paragraph(someText)
         Image(300,400,"http://store.davidtours.net/wp-content/uploads/lobster.jpeg")
         Header("Activity")
-        Box(Action("Your name:", greet))
+        Box([Action("Your name:", greet)])
         Header("Some more stuff")
-        Box(Box(Box(Paragraph("Inside text!"))))
+        Box([Box([Box([Paragraph("Inside the boxes!")])])])
     ]

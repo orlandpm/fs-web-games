@@ -120,7 +120,7 @@ Gluon.Internals.registerActivators({
     "Remote.TAction": function (a, b) { return new Remote.TAction(a, b); },
     "Remote.TBox": function (a) { return new Remote.TBox(a); }
 });
-Gluon.Internals.registerService({ "Methods": [{ "CallingConvention": ["HttpCallingConvention", ["Post"], "WebPageServer/getWebPage"], "MethodName": "Remote.WebPageServer.getWebPage", "MethodParameters": [], "MethodReturnType": [["ListType", ["TypeReference", "Remote.TransmitWebItem"]]] }, { "CallingConvention": ["HttpCallingConvention", ["Post"], "WebPageServer/rpc"], "MethodName": "Remote.WebPageServer.rpc", "MethodParameters": [{ "ParameterName": "id", "ParameterType": ["IntType"] }, { "ParameterName": "arg", "ParameterType": ["StringType"] }], "MethodReturnType": [["StringType"]] }], "TypeDefinitions": [["DefineUnion", { "UnionName": "Remote.TransmitWebItem", "UnionCases": [{ "CaseName": "TBigHeader", "CaseFields": [{ "FieldName": "Item", "FieldType": ["StringType"] }] }, { "CaseName": "THeader", "CaseFields": [{ "FieldName": "Item", "FieldType": ["StringType"] }] }, { "CaseName": "TParagraph", "CaseFields": [{ "FieldName": "Item", "FieldType": ["StringType"] }] }, { "CaseName": "TImage", "CaseFields": [{ "FieldName": "heightPixels", "FieldType": ["IntType"] }, { "FieldName": "widthPixels", "FieldType": ["IntType"] }, { "FieldName": "url", "FieldType": ["StringType"] }] }, { "CaseName": "TAction", "CaseFields": [{ "FieldName": "label", "FieldType": ["StringType"] }, { "FieldName": "id", "FieldType": ["IntType"] }] }, { "CaseName": "TBox", "CaseFields": [{ "FieldName": "Item", "FieldType": ["TypeReference", "Remote.TransmitWebItem"] }] }] }]] });
+Gluon.Internals.registerService({ "Methods": [{ "CallingConvention": ["HttpCallingConvention", ["Post"], "WebPageServer/getWebPage"], "MethodName": "Remote.WebPageServer.getWebPage", "MethodParameters": [], "MethodReturnType": [["ListType", ["TypeReference", "Remote.TransmitWebItem"]]] }, { "CallingConvention": ["HttpCallingConvention", ["Post"], "WebPageServer/rpc"], "MethodName": "Remote.WebPageServer.rpc", "MethodParameters": [{ "ParameterName": "id", "ParameterType": ["IntType"] }, { "ParameterName": "arg", "ParameterType": ["StringType"] }], "MethodReturnType": [["StringType"]] }], "TypeDefinitions": [["DefineUnion", { "UnionName": "Remote.TransmitWebItem", "UnionCases": [{ "CaseName": "TBigHeader", "CaseFields": [{ "FieldName": "Item", "FieldType": ["StringType"] }] }, { "CaseName": "THeader", "CaseFields": [{ "FieldName": "Item", "FieldType": ["StringType"] }] }, { "CaseName": "TParagraph", "CaseFields": [{ "FieldName": "Item", "FieldType": ["StringType"] }] }, { "CaseName": "TImage", "CaseFields": [{ "FieldName": "heightPixels", "FieldType": ["IntType"] }, { "FieldName": "widthPixels", "FieldType": ["IntType"] }, { "FieldName": "url", "FieldType": ["StringType"] }] }, { "CaseName": "TAction", "CaseFields": [{ "FieldName": "label", "FieldType": ["StringType"] }, { "FieldName": "id", "FieldType": ["IntType"] }] }, { "CaseName": "TBox", "CaseFields": [{ "FieldName": "Item", "FieldType": ["ListType", ["TypeReference", "Remote.TransmitWebItem"]] }] }] }]] });
 /// <reference path="Scripts/typings/jquery/jquery.d.ts" />
 /// <reference path="gen/Gluon.Generated.ts" />
 function render(wi, container) {
@@ -137,10 +137,10 @@ function render(wi, container) {
         TImage: function (h, w, u) {
             container.append("<img src=\"" + u + "\" style=\"height:" + h + "px; width:" + w + "px;\"/>");
         },
-        TBox: function (wi) {
+        TBox: function (wis) {
             container.append("<div style=\"border: 1px solid black; width: 98%; padding: 5px 1% 5px 1%;\"></div>");
             var inner = container.children().last();
-            render(wi, inner);
+            wis.forEach(function (wi) { return render(wi, inner); });
         },
         TAction: function (label, id) {
             container.append("<div style=\"padding: 5px 5px 20px 5px;\"><label>" + label + "</label> <input id=\"input-" + id + "\"/> <button id=\"button-" + id + "\">Go!</button> <div id=\"output-" + id + "\"></div></div>");

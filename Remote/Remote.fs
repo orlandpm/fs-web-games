@@ -9,7 +9,7 @@ type TransmitWebItem =
     | TParagraph of string
     | TImage of heightPixels:int * widthPixels:int * url:string
     | TAction of label:string * id:int
-    | TBox of TransmitWebItem
+    | TBox of TransmitWebItem list
 
 module WebPageServer =
 
@@ -27,7 +27,7 @@ module WebPageServer =
             let id = rand.Next(System.Int32.MinValue,System.Int32.MaxValue)
             functionLookup.Add(id, a)
             TAction (l,id)
-        | Box x -> TBox(transmit(x))
+        | Box xs -> TBox(List.map transmit xs)
 
     [<Remote>]
     let getWebPage() : TransmitWebItem list =

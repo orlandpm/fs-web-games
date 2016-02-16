@@ -44,7 +44,7 @@
     }
     export class TBox {
       
-        constructor(public Item: Remote.TransmitWebItem) { }
+        constructor(public Item: Remote.TransmitWebItem []) { }
          tag(): string { return "TBox";}
          toJSON(): any {
            return Gluon.Internals.toJSON("Remote.TransmitWebItem", this);
@@ -66,7 +66,7 @@
       widthPixels:  number,
       url:  string) => T),
       TAction: ((label:  string, id:  number) => T),
-      TBox: ((Item:  Remote.TransmitWebItem) => T)
+      TBox: ((Item:  Remote.TransmitWebItem []) => T)
     }): T {
       
         if (value instanceof TBigHeader) { return cont.TBigHeader(value.Item);}
@@ -100,4 +100,4 @@ Gluon.Internals.registerActivators({
   "Remote.TAction": (a, b) => new Remote.TAction(a, b),
   "Remote.TBox": (a) => new Remote.TBox(a)
 });
-Gluon.Internals.registerService({"Methods":[{"CallingConvention":["HttpCallingConvention",["Post"],"WebPageServer/getWebPage"],"MethodName":"Remote.WebPageServer.getWebPage","MethodParameters":[],"MethodReturnType":[["ListType",["TypeReference","Remote.TransmitWebItem"]]]},{"CallingConvention":["HttpCallingConvention",["Post"],"WebPageServer/rpc"],"MethodName":"Remote.WebPageServer.rpc","MethodParameters":[{"ParameterName":"id","ParameterType":["IntType"]},{"ParameterName":"arg","ParameterType":["StringType"]}],"MethodReturnType":[["StringType"]]}],"TypeDefinitions":[["DefineUnion",{"UnionName":"Remote.TransmitWebItem","UnionCases":[{"CaseName":"TBigHeader","CaseFields":[{"FieldName":"Item","FieldType":["StringType"]}]},{"CaseName":"THeader","CaseFields":[{"FieldName":"Item","FieldType":["StringType"]}]},{"CaseName":"TParagraph","CaseFields":[{"FieldName":"Item","FieldType":["StringType"]}]},{"CaseName":"TImage","CaseFields":[{"FieldName":"heightPixels","FieldType":["IntType"]},{"FieldName":"widthPixels","FieldType":["IntType"]},{"FieldName":"url","FieldType":["StringType"]}]},{"CaseName":"TAction","CaseFields":[{"FieldName":"label","FieldType":["StringType"]},{"FieldName":"id","FieldType":["IntType"]}]},{"CaseName":"TBox","CaseFields":[{"FieldName":"Item","FieldType":["TypeReference","Remote.TransmitWebItem"]}]}]}]]});
+Gluon.Internals.registerService({"Methods":[{"CallingConvention":["HttpCallingConvention",["Post"],"WebPageServer/getWebPage"],"MethodName":"Remote.WebPageServer.getWebPage","MethodParameters":[],"MethodReturnType":[["ListType",["TypeReference","Remote.TransmitWebItem"]]]},{"CallingConvention":["HttpCallingConvention",["Post"],"WebPageServer/rpc"],"MethodName":"Remote.WebPageServer.rpc","MethodParameters":[{"ParameterName":"id","ParameterType":["IntType"]},{"ParameterName":"arg","ParameterType":["StringType"]}],"MethodReturnType":[["StringType"]]}],"TypeDefinitions":[["DefineUnion",{"UnionName":"Remote.TransmitWebItem","UnionCases":[{"CaseName":"TBigHeader","CaseFields":[{"FieldName":"Item","FieldType":["StringType"]}]},{"CaseName":"THeader","CaseFields":[{"FieldName":"Item","FieldType":["StringType"]}]},{"CaseName":"TParagraph","CaseFields":[{"FieldName":"Item","FieldType":["StringType"]}]},{"CaseName":"TImage","CaseFields":[{"FieldName":"heightPixels","FieldType":["IntType"]},{"FieldName":"widthPixels","FieldType":["IntType"]},{"FieldName":"url","FieldType":["StringType"]}]},{"CaseName":"TAction","CaseFields":[{"FieldName":"label","FieldType":["StringType"]},{"FieldName":"id","FieldType":["IntType"]}]},{"CaseName":"TBox","CaseFields":[{"FieldName":"Item","FieldType":["ListType",["TypeReference","Remote.TransmitWebItem"]]}]}]}]]});
